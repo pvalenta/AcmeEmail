@@ -6,7 +6,7 @@ namespace AcmeEmail.MessageProcessor.Model
     /// <summary>
     /// child birth message
     /// </summary>
-    class ChildBirthMessage : BaseMessage
+    public class ChildBirthMessage : BaseMessage
     {
         /// <summary>
         /// child gender

@@ -33,6 +33,9 @@ namespace AcmeEmail.MessageProcessor.Model
         /// <returns></returns>
         public override MessageProceedResult ProceedMessage()
         {
+            // change to uppercase
+            this.MessageText = this.MessageText.ToUpper();
+
             return MessageProceedResult.FailedResult("not implemented");
         }
 
