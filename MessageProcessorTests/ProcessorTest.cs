@@ -2,6 +2,8 @@
 using AcmeEmail.MessageProcessor.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Configuration;
+using System.IO;
 
 namespace AcmeEmail.MessageProcessorTests
 {
@@ -15,7 +17,7 @@ namespace AcmeEmail.MessageProcessorTests
         /// message queue test
         /// </summary>
         [TestMethod]
-        public void MessageQueueTest()
+        public void TestProcessorQueue()
         {
             // setup classes
             var processor = new Processor();
@@ -46,12 +48,31 @@ namespace AcmeEmail.MessageProcessorTests
         }
 
         /// <summary>
+        /// proceed method test
+        /// </summary>
+        [TestMethod]
+        public void TestProcessorProceedQueueMethod()
+        {
+            // setup classes
+            var processor = new Processor();
+            var messageList = getSampleMessageArray();
+            var logPath = ConfigurationManager.AppSettings["logFolder"];
+            processor.AddMessages(messageList);
+
+            // proceed
+            processor.ProceedQueue();
+
+            // test log
+            Assert.AreEqual(true, File.Exists(Path.Combine(logPath, string.Format("{0}.log", DateTime.Today.ToString("yyyy-MM-dd")))));
+        }
+
+        /// <summary>
         /// get sample birth message
         /// </summary>
         /// <returns>birthday message</returns>
         private BirthdayMessage getSampleBirthMessage()
         {
-            var id = Guid.NewGuid();
+            var id = new Guid("12345678-1234-1234-1234-123456789012");
             var name = "recipient";
             var text = "text";
             var birthDate = DateTime.Today.AddYears(-10);
@@ -65,7 +86,7 @@ namespace AcmeEmail.MessageProcessorTests
         /// <returns>child birth message</returns>
         private ChildBirthMessage getSampleChildBirthMessage()
         {
-            var id = Guid.NewGuid();
+            var id = new Guid("12345678-1234-1234-1234-123456789012");
             var name = "recipient";
             var text = "text";
             var gender = Gender.Male;

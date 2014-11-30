@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AcmeEmail.MessageProcessor.Model;
 using System.IO;
+using System.Configuration;
 
 namespace AcmeEmail.MessageProcessorTests
 {
@@ -47,7 +48,8 @@ namespace AcmeEmail.MessageProcessorTests
             var birthDate = DateTime.Today.AddYears(-10);
             var gift = "gift";
             var message = new BirthdayMessage(id, name, text, birthDate, gift);
-            var result = MessageProceedResult.SuccessResult("D:\\AcmeEmail\\Birthday\\12345678-1234-1234-1234-123456789012.json");
+            var path = ConfigurationManager.AppSettings["birthdayFolder"];
+            var result = MessageProceedResult.SuccessResult(Path.Combine(path, "12345678-1234-1234-1234-123456789012.json"));
 
             // proceed
             var proceedResult = message.ProceedMessage();

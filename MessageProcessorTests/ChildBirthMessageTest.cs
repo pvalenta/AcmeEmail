@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AcmeEmail.MessageProcessor.Model;
 using System.IO;
+using System.Configuration;
 
 namespace AcmeEmail.MessageProcessorTests
 {
@@ -47,7 +48,8 @@ namespace AcmeEmail.MessageProcessorTests
             var gender = Gender.Male;
             var birthDay = DateTime.Today;
             var message = new ChildBirthMessage(id, name, text, gender, birthDay);
-            var result = MessageProceedResult.SuccessResult("D:\\AcmeEmail\\BabyBirth\\12345678-1234-1234-1234-123456789012.xml");
+            var path = ConfigurationManager.AppSettings["childBirthFolder"];
+            var result = MessageProceedResult.SuccessResult(Path.Combine(path, "12345678-1234-1234-1234-123456789012.xml"));
 
             // proceed
             var proceedResult = message.ProceedMessage();
