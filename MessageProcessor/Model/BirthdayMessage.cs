@@ -35,8 +35,10 @@ namespace AcmeEmail.MessageProcessor.Model
         {
             // change to uppercase
             this.MessageText = this.MessageText.ToUpper();
-
-            return MessageProceedResult.FailedResult("not implemented");
+            
+            // serialize
+            return Serializer.SerializeMessage(this, MessageSerializeFormat.Json, 
+                this.getFileNameForSerializer(ConfigReader.BirthdayFolder, MessageSerializeFormat.Json));
         }
 
         /// <summary>

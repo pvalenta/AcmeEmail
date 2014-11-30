@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace AcmeEmail.MessageProcessor.Model
@@ -31,13 +33,25 @@ namespace AcmeEmail.MessageProcessor.Model
         /// <summary>
         /// proceed message method
         /// </summary>
-        /// <returns></returns>
+        /// <returns>result</returns>
         public abstract MessageProceedResult ProceedMessage();
 
         /// <summary>
         /// proceed message async method
         /// </summary>
-        /// <returns></returns>
+        /// <returns>result</returns>
         public abstract Task<MessageProceedResult> ProceedMessageAsync();
+
+        /// <summary>
+        /// get file name
+        /// </summary>
+        /// <param name="folder">folder</param>
+        /// <param name="format">format</param>
+        /// <returns>file name</returns>
+        protected string getFileNameForSerializer(string folder, MessageSerializeFormat format)
+        {
+            // set it to {folder}\{MessageId}.{format in lowercase}
+            return Path.Combine(folder, string.Format("{0}.{1}", this.MessageId.ToString(), format.ToString().ToLower()));
+        }
     }
 }
