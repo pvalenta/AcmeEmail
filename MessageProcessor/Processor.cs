@@ -39,6 +39,17 @@ namespace AcmeEmail.MessageProcessor
         }
 
         /// <summary>
+        /// get queue length
+        /// </summary>
+        public int QueueLength
+        {
+            get
+            {
+                return queue.Count;
+            }
+        }
+
+        /// <summary>
         /// proceed queue
         /// </summary>
         public void ProceedQueue()

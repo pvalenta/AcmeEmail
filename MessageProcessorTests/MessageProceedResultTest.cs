@@ -19,8 +19,8 @@ namespace AcmeEmail.MessageProcessorTests
             var result = MessageProceedResult.FailedResult("message");
 
             // test
-            Assert.AreEqual(result.Status, MessageProceedStatus.Failed);
-            Assert.AreEqual(result.FailureMessage, "message");
+            Assert.AreEqual(MessageProceedStatus.Failed, result.Status);
+            Assert.AreEqual("message", result.FailureMessage);
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace AcmeEmail.MessageProcessorTests
             var result = MessageProceedResult.SuccessResult("c:\file.txt");
 
             // test
-            Assert.AreEqual(result.Status, MessageProceedStatus.Success);
-            Assert.AreEqual(result.SuccessFilePath, "c:\file.txt");
+            Assert.AreEqual(MessageProceedStatus.Success, result.Status);
+            Assert.AreEqual("c:\file.txt", result.SuccessFilePath);
         }
     }
 }

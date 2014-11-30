@@ -27,10 +27,16 @@ namespace AcmeEmail.MessageProcessor.Model
         /// <summary>
         /// base constructor
         /// </summary>
-        public ChildBirthMessage()
+        public ChildBirthMessage() { }
+
+        /// <summary>
+        /// base constructor
+        /// </summary>
+        public ChildBirthMessage(Guid messageId, string name, string messageText, Gender gender, DateTime babyBirthDay) :
+            base(messageId, MessageType.ChildBirth, name, messageText)
         {
-            // set message type
-            this.MessageType = Model.MessageType.ChildBirth;
+            this.Gender = gender;
+            this.BabyBirthDay = babyBirthDay;
         }
 
         /// <summary>
@@ -49,7 +55,7 @@ namespace AcmeEmail.MessageProcessor.Model
 
             // serialize
             return Serializer.SerializeMessage(this, MessageSerializeFormat.Xml,
-                this.getFileNameForSerializer(ConfigReader.ChildBirthFolder, MessageSerializeFormat.Xml));
+                this.getFileNameForSerializer(ConfigReader.ChildBirthFolder));
         }
 
         /// <summary>

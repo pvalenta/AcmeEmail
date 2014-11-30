@@ -21,10 +21,21 @@ namespace AcmeEmail.MessageProcessor.Model
         /// <summary>
         /// base constructor
         /// </summary>
-        public BirthdayMessage()
+        public BirthdayMessage() { }
+
+        /// <summary>
+        /// values constructor
+        /// </summary>
+        /// <param name="messageId">message id</param>
+        /// <param name="name">name</param>
+        /// <param name="messageText">message text</param>
+        /// <param name="birthDate">birth date</param>
+        /// <param name="gift">gift</param>
+        public BirthdayMessage(Guid messageId, string name, string messageText, DateTime birthDate, string gift) : 
+            base(messageId, MessageType.Birthday, name, messageText)
         {
-            // set message type
-            this.MessageType = Model.MessageType.Birthday;
+            this.BirthDate = birthDate;
+            this.Gift = gift;
         }
 
         /// <summary>
@@ -38,7 +49,7 @@ namespace AcmeEmail.MessageProcessor.Model
             
             // serialize
             return Serializer.SerializeMessage(this, MessageSerializeFormat.Json, 
-                this.getFileNameForSerializer(ConfigReader.BirthdayFolder, MessageSerializeFormat.Json));
+                this.getFileNameForSerializer(ConfigReader.BirthdayFolder));
         }
 
         /// <summary>

@@ -41,6 +41,8 @@ namespace AcmeEmail.MessageProcessor
         /// <returns>result</returns>
         private static MessageProceedResult serializeToJson(IMessage message, string outputFile)
         {
+            outputFile += ".json";
+
             try
             {
                 // convert to json
@@ -67,6 +69,8 @@ namespace AcmeEmail.MessageProcessor
         /// <returns></returns>
         private static MessageProceedResult serializeToXml(IMessage message, string outputFile)
         {
+            outputFile += ".xml";
+
             try
             {
                 // setup serializer

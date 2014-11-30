@@ -30,6 +30,26 @@ namespace AcmeEmail.MessageProcessor.Model
         public string MessageText { get; set; }
 
         /// <summary>
+        /// base constructor
+        /// </summary>
+        public BaseMessage() { }
+
+        /// <summary>
+        /// values constructor
+        /// </summary>
+        /// <param name="messageId">message id</param>
+        /// <param name="messageType">message type</param>
+        /// <param name="name">name</param>
+        /// <param name="MessageText">message text</param>
+        public BaseMessage(Guid messageId, MessageType messageType, string name, string messageText)
+        {
+            this.MessageId = messageId;
+            this.MessageType = messageType;
+            this.Name = name;
+            this.MessageText = messageText;
+        }
+
+        /// <summary>
         /// proceed message method
         /// </summary>
         /// <returns>result</returns>
@@ -45,12 +65,11 @@ namespace AcmeEmail.MessageProcessor.Model
         /// get file name
         /// </summary>
         /// <param name="folder">folder</param>
-        /// <param name="format">format</param>
         /// <returns>file name</returns>
-        protected string getFileNameForSerializer(string folder, MessageSerializeFormat format)
+        protected string getFileNameForSerializer(string folder)
         {
-            // set it to {folder}\{MessageId}.{format in lowercase}
-            return Path.Combine(folder, string.Format("{0}.{1}", this.MessageId.ToString(), format.ToString().ToLower()));
+            // set it to {folder}\{MessageId} without extension
+            return Path.Combine(folder, this.MessageId.ToString());
         }
     }
 }
