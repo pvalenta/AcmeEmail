@@ -1,6 +1,7 @@
 ﻿using AcmeEmail.MessageProcessor.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,13 +44,51 @@ namespace AcmeEmail.MessageProcessor
         public void ProceedQueue()
         {
             // loop and execute
-            foreach(var message in queue)
+            while (queue.Count > 0)
             {
+                // get first message
+                var message = queue[0];
+
                 // get result
                 var result = message.ProceedMessage();
 
                 // log it
                 this.logResult(result, message);
+
+                // remove it from queue
+                queue.RemoveAt(0);
+            }
+        }
+
+        /// <summary>
+        /// get file name for log
+        /// </summary>
+        /// <returns>file name</returns>
+        private string getFileNameForLog()
+        {
+            // set it to {folder}\{yyyy-MM-dd}.log 
+            return Path.Combine(ConfigReader.LogFolder, string.Format("{0}.log", DateTime.Today.ToString("yyyy-MM-dd")));
+        }
+
+        /// <summary>
+        /// get log text
+        /// </summary>
+        /// <param name="result">result state</param>
+        /// <param name="message">message</param>
+        /// <returns></returns>
+        private string getLogText(MessageProceedResult result, IMessage message)
+        {
+            if (result.Status == MessageProceedStatus.Success)
+            {
+                // set it to {messageId}\t{messageType}\t{outputFile}\t{status}
+                return string.Format("{0}\t{1}\t{2}\t{3}" + Environment.NewLine,
+                    message.MessageId.ToString(), message.MessageType.ToString(), result.SuccessFilePath, result.Status.ToString());
+            }
+            else
+            {
+                // set it to {messageId}\t{messageType}\t{failedMessage}\t{status}
+                return string.Format("{0}\t{1}\t{2}\t{3}" + Environment.NewLine,
+                    message.MessageId.ToString(), message.MessageType.ToString(), result.FailureMessage, result.Status.ToString());
             }
         }
 
@@ -60,7 +99,7 @@ namespace AcmeEmail.MessageProcessor
         /// <param name="message">message</param>
         private void logResult(MessageProceedResult result, IMessage message)
         {
-
+            File.AppendAllText(getFileNameForLog(), getLogText(result, message));
         }
 
         /// <summary>
