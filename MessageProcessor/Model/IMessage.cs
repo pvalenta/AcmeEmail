@@ -33,11 +33,5 @@ namespace AcmeEmail.MessageProcessor.Model
         /// </summary>
         /// <returns></returns>
         MessageProceedResult ProceedMessage();
-
-        /// <summary>
-        /// proceed message async method
-        /// </summary>
-        /// <returns></returns>
-        Task<MessageProceedResult> ProceedMessageAsync();
     }
 }

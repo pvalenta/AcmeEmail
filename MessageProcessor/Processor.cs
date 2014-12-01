@@ -112,31 +112,5 @@ namespace AcmeEmail.MessageProcessor
         {
             File.AppendAllText(getFileNameForLog(), getLogText(result, message));
         }
-
-        /// <summary>
-        /// proceed queue async
-        /// </summary>
-        async public void ProceedQueueAsync()
-        {
-            // loop and execute
-            foreach (var message in queue)
-            {
-                // get result
-                var result = await message.ProceedMessageAsync();
-
-                // log it
-                await logResultAsync(result, message);
-            }
-        }
-
-        /// <summary>
-        /// log result
-        /// </summary>
-        /// <param name="result">result state</param>
-        /// <param name="message">message</param>
-        async private Task<bool> logResultAsync(MessageProceedResult result, IMessage message)
-        {
-            return true;
-        }
     }
 }

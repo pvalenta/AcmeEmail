@@ -51,14 +51,5 @@ namespace AcmeEmail.MessageProcessor.Model
             return Serializer.SerializeMessage(this, MessageSerializeFormat.Json, 
                 this.getFileNameForSerializer(ConfigReader.BirthdayFolder));
         }
-
-        /// <summary>
-        /// proceed message async method
-        /// </summary>
-        /// <returns></returns>
-        async public override Task<MessageProceedResult> ProceedMessageAsync()
-        {
-            return MessageProceedResult.FailedResult("not implemented");
-        }
     }
 }

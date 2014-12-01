@@ -56,12 +56,6 @@ namespace AcmeEmail.MessageProcessor.Model
         public abstract MessageProceedResult ProceedMessage();
 
         /// <summary>
-        /// proceed message async method
-        /// </summary>
-        /// <returns>result</returns>
-        public abstract Task<MessageProceedResult> ProceedMessageAsync();
-
-        /// <summary>
         /// get file name
         /// </summary>
         /// <param name="folder">folder</param>
