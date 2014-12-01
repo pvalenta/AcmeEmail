@@ -4,6 +4,10 @@ Main logic is in Processor class, initialize it and use these methods:
 - **AddMessage, AddMessages** for add messages into queue
 - **ProceedQueue** to execute queue
 
+## Before begin:
+
+Change configuration paths located at **MessageProcessorTests\App.config**
+
 
 ## Requiremens:
 You are the new server side developer at this new shiny start-up, Acme Email. The product the company is feverishly trying to push out is a Message Processor (c). The front end is being developed by the expert Acme front end team. The product is an Enterprise grade application.
