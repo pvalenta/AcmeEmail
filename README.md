@@ -14,7 +14,7 @@ The Message Processor (c) processes different type of messages. At the moment Ac
 This is only the start. Over time Acme plans to add other types of Messages like "Anniversary, Job Promotion, Happy 21st, etc." They want to corner the Message Processor market.
 What you need to do is process a process a queue of in coming messages. There is one queue for all messages.
 
-**Birthday Message Process:*)
+**Birthday Message Process:**
 - Convert 'Standard Message Text' field to all Upper case.
 - Serialize to json and write to file in directory /Birthdays
 
